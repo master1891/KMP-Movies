@@ -30,6 +30,9 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
+
+
+
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -42,6 +45,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.bundles.coil)
             implementation(libs.material.icons.extended)
+            // Compose Multiplatform Navigation
+            implementation(libs.navigation.compose)
+
 
         }
 

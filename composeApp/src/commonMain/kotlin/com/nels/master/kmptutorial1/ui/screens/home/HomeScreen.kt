@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
+import com.nels.master.kmptutorial1.Movie
 import com.nels.master.kmptutorial1.MovieCard
 import com.nels.master.kmptutorial1.movies
 import com.nels.master.kmptutorial1.ui.screens.TemplateScreen
@@ -24,7 +25,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onMovieClick: (Movie) -> Unit) {
 
     TemplateScreen {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -43,10 +44,13 @@ fun HomeScreen() {
                 columns = GridCells.Adaptive(90.dp),
                 contentPadding = PaddingValues(4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.padding(padding)
             ) {
                 items(movies, key = { it.id }) {
-                    MovieCard(it)
+                    MovieCard(it){
+                        onMovieClick(it)
+                    }
                 }
             }
         }

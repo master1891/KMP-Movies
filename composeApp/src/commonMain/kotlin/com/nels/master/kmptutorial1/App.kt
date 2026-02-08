@@ -1,5 +1,6 @@
 package com.nels.master.kmptutorial1
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +18,7 @@ import coil3.compose.AsyncImage
 import coil3.compose.setSingletonImageLoaderFactory
 import coil3.request.crossfade
 import coil3.util.DebugLogger
+import com.nels.master.kmptutorial1.ui.navigation.Navigation
 import com.nels.master.kmptutorial1.ui.screens.detail.DetailScreen
 import com.nels.master.kmptutorial1.ui.screens.home.HomeScreen
 
@@ -29,14 +31,15 @@ fun App() {
             .logger(DebugLogger())
             .crossfade(true).build()
     }
-    //HomeScreen()
-    DetailScreen()
+    Navigation()
 }
 
 @Composable
-fun MovieCard(movie: Movie) {
+fun MovieCard(movie: Movie,onClick: () -> Unit) {
 
-    Column {
+    Column(
+        modifier = Modifier.clickable(onClick = onClick)
+    ) {
         AsyncImage(
             model = movie.postr,
             contentDescription = movie.title,
