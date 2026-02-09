@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.nels.master.kmptutorial1.Movie
+import com.nels.master.kmptutorial1.data.Movie
 import com.nels.master.kmptutorial1.ui.screens.TemplateScreen
 import kmptutorial1.composeapp.generated.resources.Res
 import kmptutorial1.composeapp.generated.resources.go_back

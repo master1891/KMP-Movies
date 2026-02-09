@@ -44,9 +44,12 @@ coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.re
 coil-core = { module = "io.coil-kt.coil3:coil", version.ref = "coilKtor" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "coilKtor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "coilKtor" }
+ktor-client-negotation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "coilKtor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "coilKtor" }
+
 material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 #navigation
-navigation-compose = { group = "org.jetbrains.androidx.navigation",name = "navigation-compose", version.ref = "navigation-compose" }
+navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
 
 [bundles]
 
@@ -64,3 +67,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

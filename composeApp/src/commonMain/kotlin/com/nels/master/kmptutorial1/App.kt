@@ -18,9 +18,8 @@ import coil3.compose.AsyncImage
 import coil3.compose.setSingletonImageLoaderFactory
 import coil3.request.crossfade
 import coil3.util.DebugLogger
+import com.nels.master.kmptutorial1.data.Movie
 import com.nels.master.kmptutorial1.ui.navigation.Navigation
-import com.nels.master.kmptutorial1.ui.screens.detail.DetailScreen
-import com.nels.master.kmptutorial1.ui.screens.home.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,7 +34,7 @@ fun App() {
 }
 
 @Composable
-fun MovieCard(movie: Movie,onClick: () -> Unit) {
+fun MovieCard(movie: Movie, onClick: () -> Unit) {
 
     Column(
         modifier = Modifier.clickable(onClick = onClick)

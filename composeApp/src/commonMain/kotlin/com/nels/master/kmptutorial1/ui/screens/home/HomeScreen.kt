@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -21,9 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.nels.master.kmptutorial1.Movie
+import com.nels.master.kmptutorial1.data.Movie
 import com.nels.master.kmptutorial1.MovieCard
-import com.nels.master.kmptutorial1.movies
 import com.nels.master.kmptutorial1.ui.screens.TemplateScreen
 import kmptutorial1.composeapp.generated.resources.Res
 import kmptutorial1.composeapp.generated.resources.app_name
@@ -32,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    vm: HomeViewModel = viewModel{ HomeViewModel() },
+    vm: HomeViewModel,
     onMovieClick: (Movie) -> Unit
 ) {
 

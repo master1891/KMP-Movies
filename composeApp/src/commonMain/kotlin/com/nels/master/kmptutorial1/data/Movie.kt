@@ -1,4 +1,4 @@
-package com.nels.master.kmptutorial1
+package com.nels.master.kmptutorial1.data
 
 data class Movie(
     val id: Int,
