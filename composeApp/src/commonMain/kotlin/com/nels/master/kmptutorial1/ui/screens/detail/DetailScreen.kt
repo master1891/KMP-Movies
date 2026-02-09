@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.nels.master.kmptutorial1.data.Movie
+import com.nels.master.kmptutorial1.ui.common.ProgressIndicator
 import com.nels.master.kmptutorial1.ui.screens.TemplateScreen
 import kmptutorial1.composeapp.generated.resources.Res
 import kmptutorial1.composeapp.generated.resources.go_back
@@ -28,13 +28,15 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(movie: Movie, onBack: () -> Unit) {
+fun DetailScreen(vm: DetailViewModel, onBack: () -> Unit) {
+
+    val state = vm.uiState.value
 
     TemplateScreen {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = movie.title) },
+                    title = { Text(text = state.movie?.title ?: "Cargando ...") },
                     navigationIcon = {
                         IconButton(onClick = onBack) {
                             Icon(
@@ -47,28 +49,32 @@ fun DetailScreen(movie: Movie, onBack: () -> Unit) {
             },
 
             ) { padding ->
-            Column(
-                modifier = Modifier
-                    .padding(padding)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                AsyncImage(
-                    model = movie.postr,
-                    contentDescription = movie.title,
-                    contentScale = ContentScale.Crop,
-
+            ProgressIndicator(state.loading)
+            state.movie?.let { movie ->
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(16f/9f)
-                )
+                        .padding(padding)
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    AsyncImage(
+                        model = movie.postr,
+                        contentDescription = movie.title,
+                        contentScale = ContentScale.Crop,
 
-                Text(
-                    text = movie.title,
-                    modifier = Modifier.padding(16.dp),
-                    style = MaterialTheme.typography.headlineMedium,
-                    maxLines = 1
-                )
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(16f / 9f)
+                    )
+
+                    Text(
+                        text = movie.title,
+                        modifier = Modifier.padding(16.dp),
+                        style = MaterialTheme.typography.headlineMedium,
+                        maxLines = 1
+                    )
+                }
             }
+
         }
     }
 }

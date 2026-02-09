@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nels.master.kmptutorial1.data.Movie
 import com.nels.master.kmptutorial1.MovieCard
+import com.nels.master.kmptutorial1.ui.common.ProgressIndicator
 import com.nels.master.kmptutorial1.ui.screens.TemplateScreen
 import kmptutorial1.composeapp.generated.resources.Res
 import kmptutorial1.composeapp.generated.resources.app_name
@@ -49,25 +50,18 @@ fun HomeScreen(
             ) { padding ->
 
             val state = vm.state
-            if (state.loading){
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize().padding(padding)
-                ){
-                    CircularProgressIndicator()
-                }
-            }else{
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(90.dp),
-                    contentPadding = PaddingValues(4.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.padding(padding)
-                ) {
-                    items(state.movies, key = { it.id }) {
-                        MovieCard(it){
-                            onMovieClick(it)
-                        }
+
+            ProgressIndicator(vm.state.loading)
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(90.dp),
+                contentPadding = PaddingValues(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.padding(padding)
+            ) {
+                items(state.movies, key = { it.id }) {
+                    MovieCard(it) {
+                        onMovieClick(it)
                     }
                 }
             }
