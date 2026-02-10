@@ -51,7 +51,7 @@ fun HomeScreen(
 
             val state = vm.state
 
-            ProgressIndicator(vm.state.loading)
+            ProgressIndicator(vm.state.loading, Modifier.padding(padding))
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(90.dp),
                 contentPadding = PaddingValues(4.dp),

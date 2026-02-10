@@ -7,10 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nels.master.kmptutorial1.data.Movie
 import com.nels.master.kmptutorial1.data.MoviesRepository
-import com.nels.master.kmptutorial1.data.MoviesService
-import com.nels.master.kmptutorial1.data.RemoteMovie
-import com.nels.master.kmptutorial1.data.movies
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeViewModel(

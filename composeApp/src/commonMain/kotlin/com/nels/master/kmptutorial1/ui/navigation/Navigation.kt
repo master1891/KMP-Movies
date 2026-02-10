@@ -11,7 +11,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.nels.master.kmptutorial1.data.MoviesRepository
 import com.nels.master.kmptutorial1.data.MoviesService
-import com.nels.master.kmptutorial1.data.movies
 import com.nels.master.kmptutorial1.ui.screens.detail.DetailScreen
 import com.nels.master.kmptutorial1.ui.screens.detail.DetailViewModel
 import com.nels.master.kmptutorial1.ui.screens.home.HomeScreen
@@ -89,4 +88,8 @@ private fun rememberMoviesRepository(): MoviesRepository {
     return remember {
         MoviesRepository(MoviesService(client))
     }
+
+
 }
+
+
