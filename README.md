@@ -12,7 +12,6 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 * [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
   you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
 
-![Final screenshoot](composeApp/src/commonMain/composeResources/drawable/screenshoot.jpeg)
 
 <p align="center">
   <img src="https://github.com/master1891/KMP-Movies/blob/master/composeApp/src/commonMain/composeResources/drawable/screenshoot.jpeg" width="400"/>
