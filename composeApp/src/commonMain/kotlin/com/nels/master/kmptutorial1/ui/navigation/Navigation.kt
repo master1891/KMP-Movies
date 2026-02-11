@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.nels.master.kmptutorial1.BuildConfig
 import com.nels.master.kmptutorial1.data.MoviesRepository
 import com.nels.master.kmptutorial1.data.MoviesService
 import com.nels.master.kmptutorial1.data.database.MoviesDao
@@ -81,7 +82,7 @@ private fun rememberMoviesRepository(moviesDao: MoviesDao): MoviesRepository {
                 url {
                     protocol = HTTPS
                     host = "api.themoviedb.org"
-                    parameters.append("api_key", "efdb7075831d13ad101cc281333f2a03")
+                    parameters.append("api_key", BuildConfig.API_KEY)
                 }
             }
         }

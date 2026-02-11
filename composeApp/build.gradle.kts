@@ -1,5 +1,5 @@
-import com.google.devtools.ksp.gradle.KspTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.buildConfig)
 }
 
 kotlin {
@@ -69,7 +70,6 @@ kotlin {
         }
 
 
-
     }
 }
 
@@ -117,6 +117,17 @@ dependencies {
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+buildConfig {
+
+    packageName("com.nels.master.kmptutorial1")
+
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").reader())
+    val apiKey = properties.getProperty("api_key")
+
+    buildConfigField("String", "API_KEY", apiKey)
 }
 
 
