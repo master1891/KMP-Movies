@@ -27,11 +27,12 @@ import com.nels.master.kmptutorial1.ui.screens.TemplateScreen
 import kmptutorial1.composeapp.generated.resources.Res
 import kmptutorial1.composeapp.generated.resources.app_name
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    vm: HomeViewModel,
+    vm: HomeViewModel = koinViewModel(),
     onMovieClick: (Movie) -> Unit
 ) {
 

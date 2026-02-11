@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ValidateDarkmode()
             val database = getDatabaseBuilder(this)
-            App(database.build().moviesDao())
+            App()
         }
     }
 }

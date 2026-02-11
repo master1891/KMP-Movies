@@ -1,9 +1,12 @@
 package com.nels.master.kmptutorial1
 
 import androidx.compose.ui.window.ComposeUIViewController
-import com.nels.master.kmptutorial1.data.database.getDatabaseBuider
+import com.nels.master.kmptutorial1.di.initkoin
 
-fun MainViewController() = ComposeUIViewController {
-    val database = getDatabaseBuider()
-    App(database.moviesDao())
+fun MainViewController() = ComposeUIViewController(
+    configure = {
+        initkoin()
+    }
+) {
+    App()
 }

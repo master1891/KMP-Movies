@@ -24,14 +24,14 @@ import com.nels.master.kmptutorial1.ui.navigation.Navigation
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App(moviesDao: MoviesDao) {
+fun App() {
 
     setSingletonImageLoaderFactory { context ->
         ImageLoader.Builder(context)
             .logger(DebugLogger())
             .crossfade(true).build()
     }
-    Navigation(moviesDao = moviesDao)
+    Navigation()
 }
 
 @Composable

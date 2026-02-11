@@ -22,25 +22,26 @@ import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.URLProtocol
 import io.ktor.http.URLProtocol.Companion.HTTPS
+import io.ktor.http.parameters
+import io.ktor.http.parametersOf
 import io.ktor.serialization.kotlinx.json.json
 import kmptutorial1.composeapp.generated.resources.Res
 import kmptutorial1.composeapp.generated.resources.api_key
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
-fun Navigation(moviesDao: MoviesDao) {
+fun Navigation() {
     val navController = rememberNavController()
 
-    val repository = rememberMoviesRepository(moviesDao)
 
-    val homeViewmodel = viewModel { HomeViewModel(repository) }
 
 
     NavHost(navController = navController, startDestination = Routes.Home.route) {
         composable(Routes.Home.route) {
             HomeScreen(
-                vm = homeViewmodel,
             ) {
                 navController.navigate(Routes.Detail.createRoute(it.id))
             }
@@ -56,42 +57,16 @@ fun Navigation(moviesDao: MoviesDao) {
         ) { backStackEntry ->
 
             val idMovie = backStackEntry.arguments?.getInt("idMovie") ?: 0
-            val movie = homeViewmodel.state.movies.first { it.id == idMovie }
+
 
             DetailScreen(
-                viewModel { DetailViewModel(idMovie, repository) }
+                vm = koinViewModel(parameters = { parametersOf(idMovie) })
             ) {
                 navController.popBackStack()
             }
         }
 
     }
-}
-
-@Composable
-private fun rememberMoviesRepository(moviesDao: MoviesDao): MoviesRepository {
-
-    val client =
-        HttpClient {
-            install(ContentNegotiation) {
-                json(Json {
-                    ignoreUnknownKeys = true
-                })
-            }
-            install(DefaultRequest) {
-                url {
-                    protocol = HTTPS
-                    host = "api.themoviedb.org"
-                    parameters.append("api_key", BuildConfig.API_KEY)
-                }
-            }
-        }
-
-    return remember {
-        MoviesRepository(MoviesService(client),moviesDao)
-    }
-
-
 }
 
 
