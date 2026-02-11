@@ -1,12 +1,34 @@
 package com.nels.master.kmptutorial1.data
 
+import com.nels.master.kmptutorial1.data.database.MoviesDao
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
+
 class MoviesRepository(
-    private val moviesService: MoviesService
+    private val moviesService: MoviesService,
+    private val moviesDao: MoviesDao
 
 ) {
-    suspend fun fetchMoviesPopularMovies(): List<Movie> {
-        return moviesService.fetchMoviesPopularMovies().results.map { it.toDomainMovie() }
+
+
+     val movies: Flow<List<Movie>> = moviesDao.fetchPopularMovies().onEach {
+        if (it.isEmpty()) {
+            val moviesFromApi = moviesService.fetchMoviesPopularMovies().results.map { it.toDomainMovie() }
+            moviesDao.insertMovies(moviesFromApi)
+        }
     }
+
+
+
+     fun fetchMovieById (idMovie: Int): Flow<Movie> = moviesDao.fetchMovieById(idMovie).onEach {
+        if (it == null) {
+            val movieFromApi = moviesService.fetchMovieById(idMovie).toDomainMovie()
+            moviesDao.insertMovies(listOf(movieFromApi))
+        }
+    }
+
+
+
 
     private fun RemoteMovie.toDomainMovie(): Movie {
 

@@ -19,18 +19,19 @@ import coil3.compose.setSingletonImageLoaderFactory
 import coil3.request.crossfade
 import coil3.util.DebugLogger
 import com.nels.master.kmptutorial1.data.Movie
+import com.nels.master.kmptutorial1.data.database.MoviesDao
 import com.nels.master.kmptutorial1.ui.navigation.Navigation
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App() {
+fun App(moviesDao: MoviesDao) {
 
     setSingletonImageLoaderFactory { context ->
         ImageLoader.Builder(context)
             .logger(DebugLogger())
             .crossfade(true).build()
     }
-    Navigation()
+    Navigation(moviesDao = moviesDao)
 }
 
 @Composable

@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.nels.master.kmptutorial1.data.MoviesRepository
 import com.nels.master.kmptutorial1.data.MoviesService
+import com.nels.master.kmptutorial1.data.database.MoviesDao
 import com.nels.master.kmptutorial1.ui.screens.detail.DetailScreen
 import com.nels.master.kmptutorial1.ui.screens.detail.DetailViewModel
 import com.nels.master.kmptutorial1.ui.screens.home.HomeScreen
@@ -27,10 +28,10 @@ import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun Navigation() {
+fun Navigation(moviesDao: MoviesDao) {
     val navController = rememberNavController()
 
-    val repository = rememberMoviesRepository()
+    val repository = rememberMoviesRepository(moviesDao)
 
     val homeViewmodel = viewModel { HomeViewModel(repository) }
 
@@ -67,7 +68,7 @@ fun Navigation() {
 }
 
 @Composable
-private fun rememberMoviesRepository(): MoviesRepository {
+private fun rememberMoviesRepository(moviesDao: MoviesDao): MoviesRepository {
 
     val client =
         HttpClient {
@@ -86,7 +87,7 @@ private fun rememberMoviesRepository(): MoviesRepository {
         }
 
     return remember {
-        MoviesRepository(MoviesService(client))
+        MoviesRepository(MoviesService(client),moviesDao)
     }
 
 

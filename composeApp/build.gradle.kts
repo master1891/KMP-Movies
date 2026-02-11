@@ -1,5 +1,5 @@
+import com.google.devtools.ksp.gradle.KspTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -28,13 +30,12 @@ kotlin {
     }
 
     sourceSets {
+
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
-
-
-
+            implementation(libs.androidx.room.sqlite.wrapper)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -52,6 +53,10 @@ kotlin {
             implementation(libs.ktor.client.negotation)
             implementation(libs.ktor.serialization.kotlinx.json)
 
+            //Room
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.sqlite.bundled)
+
 
         }
 
@@ -62,6 +67,9 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+
+
+
     }
 }
 
@@ -96,9 +104,19 @@ android {
             force(libs.androidx.activity.compose)
         }
     }
+
+
 }
 
 dependencies {
     debugImplementation(libs.compose.uiTooling)
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
 }
+
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 

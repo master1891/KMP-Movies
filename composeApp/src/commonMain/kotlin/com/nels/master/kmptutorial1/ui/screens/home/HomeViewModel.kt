@@ -10,7 +10,7 @@ import com.nels.master.kmptutorial1.data.MoviesRepository
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val  moviewRepository: MoviesRepository
+    private val moviewRepository: MoviesRepository
 ) : ViewModel() {
 
     var state by mutableStateOf(UIState())
@@ -19,10 +19,10 @@ class HomeViewModel(
     init {
         viewModelScope.launch {
             state = UIState(loading = true)
-            state = UIState(
-                loading = false,
-                movies = moviewRepository.fetchMoviesPopularMovies()
-            )
+            moviewRepository.movies.collect {
+                if (it.isNotEmpty())
+                    state = UIState(loading = false, movies = it)
+            }
         }
     }
 
