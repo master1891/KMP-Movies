@@ -1,15 +1,19 @@
-package com.nels.master.kmptutorial1.data
+package com.nels.master.kmptutorial1.data.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 
 class MoviesService(
     private val client: HttpClient
 ) {
-    suspend fun fetchMoviesPopularMovies(): RemoteResult {
+    suspend fun fetchMoviesPopularMovies(region: String): RemoteResult {
         return client
-            .get("/3/discover/movie?sort_by=popularity.desc")
+            .get("/3/discover/movie"){
+                parameter("sort_by", "popularity.desc")
+                parameter("region", region)
+            }
             .body<RemoteResult>()
     }
 

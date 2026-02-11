@@ -1,19 +1,21 @@
 package com.nels.master.kmptutorial1.data
 
 import com.nels.master.kmptutorial1.data.database.MoviesDao
+import com.nels.master.kmptutorial1.data.remote.MoviesService
+import com.nels.master.kmptutorial1.data.remote.RemoteMovie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 
 class MoviesRepository(
     private val moviesService: MoviesService,
-    private val moviesDao: MoviesDao
-
+    private val moviesDao: MoviesDao,
+    private val regionRepository: RegionRepository
 ) {
 
 
      val movies: Flow<List<Movie>> = moviesDao.fetchPopularMovies().onEach {
         if (it.isEmpty()) {
-            val moviesFromApi = moviesService.fetchMoviesPopularMovies().results.map { it.toDomainMovie() }
+            val moviesFromApi = moviesService.fetchMoviesPopularMovies(regionRepository.fetchRegion()).results.map { it.toDomainMovie() }
             moviesDao.insertMovies(moviesFromApi)
         }
     }

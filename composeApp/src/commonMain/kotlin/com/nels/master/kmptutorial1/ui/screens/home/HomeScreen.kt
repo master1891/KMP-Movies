@@ -22,8 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nels.master.kmptutorial1.data.Movie
 import com.nels.master.kmptutorial1.MovieCard
+import com.nels.master.kmptutorial1.ui.common.PermissionRequestUIEffect
 import com.nels.master.kmptutorial1.ui.common.ProgressIndicator
 import com.nels.master.kmptutorial1.ui.screens.TemplateScreen
+import dev.icerock.moko.permissions.Permission
+import dev.icerock.moko.permissions.location.COARSE_LOCATION
 import kmptutorial1.composeapp.generated.resources.Res
 import kmptutorial1.composeapp.generated.resources.app_name
 import org.jetbrains.compose.resources.stringResource
@@ -35,6 +38,10 @@ fun HomeScreen(
     vm: HomeViewModel = koinViewModel(),
     onMovieClick: (Movie) -> Unit
 ) {
+
+    PermissionRequestUIEffect(permission = Permission.COARSE_LOCATION ) {
+        vm.onUiReady()
+    }
 
     TemplateScreen {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()

@@ -3,7 +3,8 @@ package com.nels.master.kmptutorial1.di
 import androidx.room.RoomDatabase
 import com.nels.master.kmptutorial1.BuildConfig
 import com.nels.master.kmptutorial1.data.MoviesRepository
-import com.nels.master.kmptutorial1.data.MoviesService
+import com.nels.master.kmptutorial1.data.RegionRepository
+import com.nels.master.kmptutorial1.data.remote.MoviesService
 import com.nels.master.kmptutorial1.data.database.MoviesDao
 import com.nels.master.kmptutorial1.data.database.MoviesDatabase
 import com.nels.master.kmptutorial1.ui.screens.detail.DetailViewModel
@@ -40,6 +41,7 @@ val dataModule = module {
 //    factory { MoviesService(client = get()) }
 
     factoryOf(::MoviesRepository)
+    factoryOf(::RegionRepository)
     factoryOf(::MoviesService)
 
     single<HttpClient> {

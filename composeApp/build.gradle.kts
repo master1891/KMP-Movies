@@ -39,6 +39,8 @@ kotlin {
             implementation(libs.androidx.room.sqlite.wrapper)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            //Play Services Location
+            implementation(libs.play.services.location)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -65,7 +67,9 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
-
+            //Permissions
+            implementation(libs.moko.permissions)
+            implementation(libs.moko.permissions.location)
 
         }
 

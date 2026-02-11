@@ -1,4 +1,4 @@
-package com.nels.master.kmptutorial1.data
+package com.nels.master.kmptutorial1.data.remote
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
