@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nels.master.kmptutorial1.data.Movie
 import com.nels.master.kmptutorial1.data.MoviesRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
@@ -12,10 +14,10 @@ class DetailViewModel(
     private val moviesRepository: MoviesRepository
 ) : ViewModel() {
 
-    var uiState = mutableStateOf(UIState())
-        private set
+    private var _uiState = MutableStateFlow(UIState())
+    val uiState = _uiState.asStateFlow()
 
-
+    
     fun toggleFavorite() {
         uiState.value.movie?.let {movie ->
             viewModelScope.launch {
@@ -26,10 +28,10 @@ class DetailViewModel(
 
     init {
         viewModelScope.launch {
-            uiState.value = UIState(loading = true)
+            _uiState.value = UIState(loading = true)
 
             moviesRepository.fetchMovieById(idMovie).collect {
-                uiState.value = UIState(loading = false, movie = it)
+                _uiState.value = UIState(loading = false, movie = it)
             }
 
         }

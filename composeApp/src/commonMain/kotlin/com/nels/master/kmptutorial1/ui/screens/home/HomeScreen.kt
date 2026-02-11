@@ -15,6 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -57,9 +59,9 @@ fun HomeScreen(
 
             ) { padding ->
 
-            val state = vm.state
+            val state by  vm.uiState.collectAsState()
 
-            ProgressIndicator(vm.state.loading, Modifier.padding(padding))
+            ProgressIndicator(state.loading , Modifier.padding(padding))
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(90.dp),
                 contentPadding = PaddingValues(4.dp),
@@ -67,7 +69,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.padding(padding)
             ) {
-                items(state.movies, key = { it.id }) {
+                items(state.movies , key = { it.id }) {
                     MovieCard(it) {
                         onMovieClick(it)
                     }
