@@ -28,8 +28,6 @@ class MoviesRepository(
     }
 
 
-
-
     private fun RemoteMovie.toDomainMovie(): Movie {
 
         return Movie(
@@ -42,13 +40,18 @@ class MoviesRepository(
             originalTitle = originalTitle,
             originalLanguage = originalLanguage,
             popularity = popularity,
-            voteAverage = voteAverage
+            voteAverage = voteAverage,
+            isFavorite = false
         )
 
     }
 
     suspend fun fetchMovieDetail(idMovie: Int): Movie {
         return moviesService.fetchMovieById(idMovie).toDomainMovie()
+    }
+
+    suspend fun toggleFavorite(movie: Movie) {
+        moviesDao.insertMovies(listOf(movie.copy(isFavorite = !movie.isFavorite)))
     }
 
 }

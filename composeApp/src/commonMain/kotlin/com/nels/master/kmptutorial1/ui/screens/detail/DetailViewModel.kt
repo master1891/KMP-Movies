@@ -15,6 +15,15 @@ class DetailViewModel(
     var uiState = mutableStateOf(UIState())
         private set
 
+
+    fun toggleFavorite() {
+        uiState.value.movie?.let {movie ->
+            viewModelScope.launch {
+                moviesRepository.toggleFavorite(movie)
+            }
+        }
+    }
+
     init {
         viewModelScope.launch {
             uiState.value = UIState(loading = true)

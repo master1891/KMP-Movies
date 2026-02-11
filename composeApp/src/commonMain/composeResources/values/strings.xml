@@ -8,5 +8,6 @@
     <string name = "vote_average">Vote Average</string>
     <string name = "vote_count">Vote Count</string>
     <string name = "popularity">Popularity</string>
+    <string name = "favorites">Favorites</string>
 
 </resources>

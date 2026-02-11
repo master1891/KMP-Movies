@@ -11,6 +11,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,6 +39,7 @@ import com.nels.master.kmptutorial1.data.Movie
 import com.nels.master.kmptutorial1.ui.common.ProgressIndicator
 import com.nels.master.kmptutorial1.ui.screens.TemplateScreen
 import kmptutorial1.composeapp.generated.resources.Res
+import kmptutorial1.composeapp.generated.resources.favorites
 import kmptutorial1.composeapp.generated.resources.go_back
 import kmptutorial1.composeapp.generated.resources.original_language
 import kmptutorial1.composeapp.generated.resources.original_title
@@ -58,6 +61,23 @@ fun DetailScreen(vm: DetailViewModel, onBack: () -> Unit) {
             topBar = {
                 DetailTopAppBar(state.movie?.title ?: "Cargando ...", onBack, scrollBehavior)
             },
+            floatingActionButton = {
+                state.movie?.let {
+                        IconButton(
+                            onClick = vm::toggleFavorite
+                        ){
+                            val icon = if (it.isFavorite)
+                                Icons.Default.Favorite
+                            else
+                                Icons.Default.FavoriteBorder
+                            Icon(
+                                imageVector =  icon,
+                                contentDescription = stringResource(Res.string.favorites)
+                            )
+                        }
+                }
+            }
+
         ) { padding ->
             ProgressIndicator(state.loading, modifier = Modifier.padding(padding))
             state.movie?.let { movie ->
