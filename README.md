@@ -14,6 +14,10 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 ![Final screenshoot](composeApp/src/commonMain/composeResources/drawable/screenshoot.jpeg)
 
+<p align="center">
+  <img src="https://github.com/master1891/KMP-Movies/blob/master/composeApp/src/commonMain/composeResources/drawable/screenshoot.jpeg" width="400"/>
+</p>
+
 
 ### Build and Run Android Application
 
